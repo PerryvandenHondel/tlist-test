@@ -18,6 +18,7 @@ type
             hostName: Ansistring;
     
         constructor Create(const sortName: Ansistring; const serverClass: Ansistring; listType: Ansistring; hostName: Ansistring);
+        function ShowAsString: Ansistring;
     end; { of class TServerClass }
 
 
@@ -38,6 +39,21 @@ begin
 end; { of constructor TServerClass.Create() }
 
 
+
+function TServerClass.ShowAsString: Ansistring;
+begin
+    Result := Format('SortName=%s  ServerClass=%s  ListType=%s  HostName=%s', 
+        [sortName, serverClass, listType, hostName]);
+end; { of function TServerClass.ShowAsString() }
+
+{
+begin
+  Result := Format('%s - Age: %d Team: %s Goals: %d',
+                   [Name,
+                    DateUtils.YearsBetween(Date, BirthDay),
+                    Team, NTeamGoals])
+end;
+}
 
 function CompareBySortName(constref Item1, Item2: TServerClass): Integer;
 {
@@ -133,9 +149,22 @@ begin
 
     ShowListEntries('Sorted list');
 
+    WriteLn();
+    { Show the first entry of the list using the index }
+    WriteLn('First (index) entry of the list: ', serverClassList[0].ShowAsString);
+
+    { Show the first entry of the list using the function First }
+    WriteLn('First entry of the list: ', serverClassList.First.ShowAsString);
+
+    { Show the last entry in the list using the function Last }
+    WriteLn('Last entry of the list: ', serverClassList.Last.ShowAsString);
+    
 
     { Destroy the list and all members }
     FreeAndNil(serverClassList);
+
+
+    
 
 end. { of program TList5 s}
 
