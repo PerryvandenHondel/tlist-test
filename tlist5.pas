@@ -39,28 +39,32 @@ end; { of constructor TServerClass.Create() }
 
 
 
-// TList sort routine : compare customers by name
-// --------------------------------------------------------------------------
-// The returned integer has the following value :
-//
-//   > 0 : (positive) Item1 is less than Item2
-//     0 : Item1 is equal to Item2
-//   < 0 : (negative) Item1 is greater than Item2
 function CompareBySortName(constref Item1, Item2: TServerClass): Integer;
-var
-  serverClass1, serverClass2 : TServerClass;
-begin
-  // We start by viewing the object pointers as TCustomer objects
-  serverClass1 := TServerClass(Item1);
-  serverClass2 := TServerClass(Item2);
+{
+    TList sort routine : Compare entries by SortNamee
 
-  // Now compare by string
-  if      serverClass1.sortName > serverClass2.sortName
-  then Result := 1
-  else if serverClass1.sortName = serverClass2.sortName
-  then Result := 0
-  else Result := -1;
-end;
+    The returned integer has the following value :
+
+        > 0 : (positive) serverClass1 is less than serverClass2
+          0 : serverClass1 is equal to serverClass2
+        < 0 : (negative) IteserverClass1 is greater than serverClass12
+}
+var
+    serverClass1: TServerClass;
+    serverClass2: TServerClass;
+begin
+    // We start by viewing the object pointers as TCustomer objects
+    serverClass1 := TServerClass(Item1);
+    serverClass2 := TServerClass(Item2);
+
+    // Now compare by string
+    if serverClass1.sortName > serverClass2.sortName then
+        Result := 1
+    else if serverClass1.sortName = serverClass2.sortName then 
+        Result := 0
+    else 
+        Result := -1;
+end; { of function CompareBySortName() }
 
 
 
